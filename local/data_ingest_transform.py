@@ -80,6 +80,6 @@ def data_transform(data=None):
 
 
 if __name__ == '__main__':
-    # data = data_ingest()
+    data = data_ingest()
     # print(data_transform(data))
     print(data_transform())

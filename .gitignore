@@ -11,6 +11,7 @@ __pycache__/
 logs/*
 local/bronze/*
 local/gold/*
+azure_ready/info.txt
 
 # Distribution / packaging
 .Python
