@@ -8,6 +8,7 @@ load_dotenv()
 
 from handling.logger import logging
 from handling.exceptions import CustomException
+from data_to_table import create_table, insert_data
 
 
 bronzepath = os.path.join(os.getcwd(),'local','bronze')
@@ -15,7 +16,7 @@ goldpath = os.path.join(os.getcwd(),'local','gold')
 API_KEY = os.environ['NASA_API']
 def data_ingest():
     try:
-        url = f"https://api.nasa.gov/neo/rest/v1/feed?start_date=2026-04-09&end_date=2026-04-16&detailed=true&api_key={API_KEY}"
+        url = f"https://api.nasa.gov/neo/rest/v1/feed?start_date=2026-04-15&end_date=2026-04-21&detailed=true&api_key={API_KEY}"
         response = requests.get(url)
         logging.info('Data Fetched.')
         data = response.json()
@@ -29,6 +30,7 @@ def data_ingest():
 
 def data_transform(data=None):
     try:
+        create_table()
         transformed = []
         if not data:
             with open(os.path.join(bronzepath,'near_earth_raw.json'),'r') as f:
@@ -49,6 +51,7 @@ def data_transform(data=None):
                 })
         df = pd.DataFrame(transformed)
         logging.info('Data converted to dataframe')
+        insert_data(df,table='nasaneo')
         # filepath = os.path.join(goldpath,'.csv')
         risk_summary = df.groupby('is_hazardous').agg({
             'velocity_km_s': 'mean',
@@ -58,7 +61,6 @@ def data_transform(data=None):
     
         daily_trends = df.groupby('close_approach_date').size().reset_index(name='object_count')
         daily_trends.to_csv(os.path.join(goldpath,'daily_trends.csv'), index=False)
-
 
         df.to_parquet(os.path.join(goldpath,'table_parquet.parquet'))
         risk_summary.to_csv(os.path.join(goldpath,'risk_summary.csv'), index=False)

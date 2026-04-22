@@ -3,3 +3,5 @@ requests
 pyarrow
 fastparquet
 dotenv
+sqlalchemy
+psycopg2-binary
