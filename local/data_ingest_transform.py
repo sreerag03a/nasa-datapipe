@@ -59,14 +59,6 @@ def data_transform(data=None):
         daily_trends = df.groupby('close_approach_date').size().reset_index(name='object_count')
         daily_trends.to_csv(os.path.join(goldpath,'daily_trends.csv'), index=False)
 
-        # summary_stats = {
-        # 'total_objects': len(df),
-        # 'hazardous_count': df['is_hazardous'].sum(),
-        # 'avg_velocity': df['velocity_km_s'].mean(),
-        # 'closest_miss_km': df['miss_distance_km'].min()
-        # }
-        
-
 
         df.to_parquet(os.path.join(goldpath,'table_parquet.parquet'))
         risk_summary.to_csv(os.path.join(goldpath,'risk_summary.csv'), index=False)
