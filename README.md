@@ -5,6 +5,7 @@ A fully automated, cloud data pipeline to ingest and analyze Near Eart Objects (
 ## Architecture
 
 ![Architecture](architecture.png)
+
 The system follows a modular "Medallion" architecture to ensure data quality.
 
 1. Ingestion : Azure Data Factory (ADF) automates a data fetch daily using dynamic expressions, fetching the latest data from the API.
