@@ -31,7 +31,7 @@ This folder contains required code and instructions for the automated cloud data
 bronze-layer/neo-data.json
 ```
 
-5. Create a pipeline and then drag the `Copy data` block within `Move and Transfrom`. Set up the Source to be the REST Dataset and Sink to be the ADLS Dataset. Trigger the pipeline to test if the API works.
+5. Create a pipeline and then drag the `Copy data` block within `Move and Transfrom` to the canvas. Set up the Source to be the REST Dataset and Sink to be the ADLS Dataset. Trigger the pipeline to test if the API works.
 
 6. Go to Azure Databricks, set up a Workspace and a Personal Compute (Cluster) and a notebooks. This notebook will do the data ingestion and processing. The code for it is available in `Databricks_notebook.py`.
 
@@ -44,3 +44,7 @@ bronze-layer/neo-data.json
 1. Go to Azure Databricks -> SQL Warehouses -> Serverless Starter Warehouse. Copy the Server hostname and HTTP path.
 
 2. Within PowerBI -> Get Data -> Azure Databricks, input the hostname and HTTP path (also tick DirectQuery). You will be asked to authenticate. Authenticate via personal access token (This can be generated within the Connection details from the Serverless Starter Warehouse page).
+
+## Example Dashboard (PowerBI)
+
+![PowerBI Dashboard](NEO_dash.png)
